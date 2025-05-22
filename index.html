@@ -1,11 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST</title>
+  <meta charset="UTF-8">
+  <title>Personal Budget Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #2a2a2a;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .results {
+      margin-top: 30px;
+      background-color: #e8f5e9;
+      padding: 15px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-    
+
+  <h2>Personal Budget Tracker</h2>
+
+  <label>Monthly Income:</label>
+  <input type="number" id="income" placeholder="Enter your income">
+
+  <label>Rent Expense:</label>
+  <input type="number" id="rent" placeholder="Enter rent amount">
+
+  <label>Food Expense:</label>
+  <input type="number" id="food" placeholder="Enter food amount">
+
+  <label>Transport Expense:</label>
+  <input type="number" id="transport" placeholder="Enter transport amount">
+
+  <label>Entertainment Expense:</label>
+  <input type="number" id="entertainment" placeholder="Enter entertainment amount">
+
+  <button onclick="calculateBudget()">Calculate Summary</button>
+
+  <div class="results" id="summary" style="display:none;">
+    <h3>Monthly Summary</h3>
+    <p><strong>Total Expenses:</strong> $<span id="total"></span></p>
+    <p><strong>Remaining Balance:</strong> $<span id="remaining"></span></p>
+    <p><strong>Savings:</strong> <span id="savings"></span>%</p>
+  </div>
+
+  <script>
+    function calculateBudget() {
+      const income = parseFloat(document.getElementById("income").value);
+      const rent = parseFloat(document.getElementById("rent").value);
+      const food = parseFloat(document.getElementById("food").value);
+      const transport = parseFloat(document.getElementById("transport").value);
+      const entertainment = parseFloat(document.getElementById("entertainment").value);
+
+      const totalExpenses = rent + food + transport + entertainment;
+      const remaining = income - totalExpenses;
+      const savings = ((remaining / income) * 100).toFixed(2);
+
+      document.getElementById("total").innerText = totalExpenses.toFixed(2);
+      document.getElementById("remaining").innerText = remaining.toFixed(2);
+      document.getElementById("savings").innerText = savings;
+
+      document.getElementById("summary").style.display = "block";
+    }
+  </script>
+
 </body>
 </html>
